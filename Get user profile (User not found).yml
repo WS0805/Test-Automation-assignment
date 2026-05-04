@@ -1,0 +1,31 @@
+info:
+  name: Get user profile (User not found)
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: https://reqres.in/api/users/1234
+  auth:
+    type: apikey
+    key: x-api-key
+    value: free_user_3DFZAX8kkEkU2UERfdee5shK2kv
+    placement: header
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status code should be 404", function () {
+            expect(res.status).to.equal(404);
+          });
+
+          test("Response body should be empty {}", function () {
+            expect(JSON.stringify(res.body)).to.equal("{}");
+          });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
